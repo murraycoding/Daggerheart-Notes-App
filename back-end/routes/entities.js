@@ -71,7 +71,7 @@ router.put('/:campaign/:type/:slug', async (req, res) => {
     const { body, ...incomingFrontmatter } = req.body;
     const merged = { ...existing.data, ...incomingFrontmatter };
     await writeEntity(filePath, merged, body ?? existing.content);
-      rres.json({ _slug: req.params.slug, ...merged });
+      res.json({ _slug: req.params.slug, frontmatter: merged, body: body ?? existing.content });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
